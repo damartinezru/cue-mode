@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>AQUATIC CUE | Sonic Archive</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&amp;family=JetBrains+Mono:wght@400;500&amp;family=Hanken+Grotesk:wght@300;400;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "on-background": "#dae3f4",
+                        "on-error-container": "#ffdad6",
+                        "primary-fixed-dim": "#00dbe9",
+                        "inverse-on-surface": "#28313e",
+                        "on-primary-fixed-variant": "#004f54",
+                        "on-secondary-fixed-variant": "#39485a",
+                        "surface": "#0b1420",
+                        "surface-dim": "#0b1420",
+                        "surface-bright": "#313a47",
+                        "surface-container-lowest": "#060f1a",
+                        "on-error": "#690005",
+                        "error": "#ffb4ab",
+                        "surface-container": "#17202d",
+                        "surface-bright": "#313a47",
+                        "on-primary": "#00363a",
+                        "secondary": "#b9c8de",
+                        "inverse-primary": "#006970",
+                        "primary-fixed": "#7df4ff",
+                        "surface-container-highest": "#2d3543",
+                        "primary": "#dbfcff",
+                        "on-tertiary": "#0a3254",
+                        "secondary-container": "#39485a",
+                        "tertiary-container": "#c2dcff",
+                        "outline-variant": "#3b494b",
+                        "on-primary-container": "#006970",
+                        "inverse-surface": "#dae3f4",
+                        "primary-container": "#00f0ff",
+                        "background": "#0b1420",
+                        "tertiary-fixed": "#d1e4ff",
+                        "error-container": "#93000a",
+                        "on-secondary-fixed": "#0d1c2d",
+                        "on-tertiary-fixed-variant": "#27496c",
+                        "surface-container-high": "#222a37",
+                        "surface-container-low": "#131c28",
+                        "secondary-fixed": "#d4e4fa",
+                        "on-tertiary-fixed": "#001d36",
+                        "surface-tint": "#00dbe9",
+                        "tertiary": "#f3f6ff",
+                        "surface-variant": "#2d3543",
+                        "outline": "#849495",
+                        "on-surface-variant": "#b9cacb",
+                        "on-primary-fixed": "#002022",
+                        "tertiary-fixed-dim": "#a8c9f3"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.5rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "margin-mobile": "16px",
+                        "gutter": "24px",
+                        "unit": "4px",
+                        "container-max": "1440px",
+                        "margin-desktop": "64px"
+                    },
+                    "fontFamily": {
+                        "display-caps": ["Space Grotesk"],
+                        "label-sm": ["JetBrains Mono"],
+                        "headline-lg": ["Space Grotesk"],
+                        "body-md": ["Hanken Grotesk"],
+                        "headline-xl": ["Space Grotesk"],
+                        "headline-lg-mobile": ["Space Grotesk"]
+                    },
+                    "fontSize": {
+                        "display-caps": ["14px", {"lineHeight": "1", "letterSpacing": "0.2em", "fontWeight": "700"}],
+                        "label-sm": ["12px", {"lineHeight": "1.4", "letterSpacing": "0.1em", "fontWeight": "500"}],
+                        "headline-lg": ["40px", {"lineHeight": "1.2", "letterSpacing": "-0.02em", "fontWeight": "600"}],
+                        "body-md": ["16px", {"lineHeight": "1.6", "fontWeight": "400"}],
+                        "headline-xl": ["64px", {"lineHeight": "1.1", "letterSpacing": "-0.04em", "fontWeight": "700"}],
+                        "headline-lg-mobile": ["32px", {"lineHeight": "1.2", "fontWeight": "600"}]
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        
+        .liquid-glass {
+            background: linear-gradient(135deg, rgba(11, 20, 32, 0.8), rgba(23, 32, 45, 0.6));
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(0, 240, 255, 0.2);
+            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.5);
+        }
+
+        .chrome-text {
+            background: linear-gradient(to bottom, #ffffff 0%, #a3b8c2 50%, #7d96a3 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            filter: drop-shadow(0 0 2px rgba(255,255,255,0.5));
+        }
+
+        .caustics-overlay {
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+            opacity: 0.05;
+            pointer-events: none;
+        }
+
+        @keyframes pulse-cyan {
+            0%, 100% { opacity: 0.8; filter: drop-shadow(0 0 5px rgba(0,219,233,0.8)); }
+            50% { opacity: 1; filter: drop-shadow(0 0 15px rgba(0,219,233,1)); }
+        }
+
+        .active-pulse {
+            animation: pulse-cyan 3s infinite ease-in-out;
+        }
+
+        #mobile-menu-overlay.active {
+            opacity: 1;
+            pointer-events: auto;
+            transform: translateY(0);
+        }
+    </style>
+</head>
+<body class="bg-surface text-on-surface font-body-md overflow-hidden selection:bg-primary-container selection:text-on-primary-container h-screen flex flex-col overflow-x-hidden">
+<!-- Hidden Video Player Element -->
+<video class="hidden" id="sonic-video-player" preload="auto">
+<source id="video-source" src="" type="video/mp4"/>
+</video>
+    <!-- Global Background Container -->
+<div class="fixed inset-0 z-0">
+<div class="absolute inset-0 bg-center bg-no-repeat bg-cover sm:bg-contain lg:bg-cover hidden md:block" style="background-image: url('./assets/withbutton.png')"></div>
+<div class="absolute inset-0 bg-center bg-no-repeat bg-cover md:hidden" style="background-image: url('./assets/vertical.png')"></div>
+<!-- <div class="absolute inset-0 bg-surface/20"></div> -->
+<div class="absolute inset-0 caustics-overlay"></div>
+</div>
+<!-- Top Navigation Shell -->
+<header class="z-50 docked full-width top-0 bg-surface/40 backdrop-blur-md border-b border-outline-variant/30 shadow-[0_0_15px_rgba(0,240,255,0.2)]">
+<div class="flex justify-between items-center w-full px-margin-mobile md:px-margin-desktop py-4 max-w-container-max mx-auto gap-2">
+<div class="flex items-center gap-4 md:gap-8">
+<button class="md:hidden material-symbols-outlined text-primary-fixed-dim text-2xl p-1 rounded-md hover:bg-surface-container-high transition-colors" id="hamburger-btn">menu</button>
+<span class="font-display-caps text-display-caps tracking-widest text-primary dark:text-primary-fixed-dim bg-clip-text text-sm md:text-display-caps">CUE</span>
+<nav class="hidden md:flex items-center gap-8">
+<a class="font-label-sm text-label-sm text-primary-fixed-dim border-b-2 border-primary-fixed-dim pb-1 hover:scale-105 transition-all" href="#" onclick="showComingSoon('cm-clothing')">CLOTHING</a>
+<a class="font-label-sm text-label-sm text-on-surface-variant hover:text-primary transition-colors duration-300 hover:scale-105" href="#" onclick="showComingSoon('cm-pressfolios')">PRESSFOLIOS</a>
+<a class="font-label-sm text-label-sm text-on-surface-variant hover:text-primary transition-colors duration-300 hover:scale-105" href="#" onclick="showComingSoon('cm-websites')">WEBSITES</a>
+<a class="font-label-sm text-label-sm text-on-surface-variant hover:text-primary transition-colors duration-300 hover:scale-105" href="#" onclick="showComingSoon('cm-music')">MUSIC</a>
+</nav>
+</div>
+<div class="flex items-center gap-6">
+<button class="material-symbols-outlined text-on-surface-variant hover:text-primary text-3xl transition-all" data-icon="skip_previous" id="prev-btn">skip_previous</button>
+<button class="flex items-center justify-center w-12 h-12 rounded-full bg-primary-fixed-dim text-on-primary shadow-[0_0_15px_rgba(0,240,255,0.6)] hover:scale-110 transition-all active-pulse" id="play-pause-btn">
+<span class="material-symbols-outlined text-3xl" data-icon="pause" id="play-icon">pause</span>
+</button>
+<button class="material-symbols-outlined text-on-surface-variant hover:text-primary text-3xl transition-all" data-icon="skip_next" id="next-btn">skip_next</button>
+</div>
+<!-- <div class="flex items-center gap-6">
+<div class="flex items-center gap-6">
+<button class="material-symbols-outlined text-on-surface-variant hover:text-primary text-3xl transition-all" data-icon="skip_previous" id="prev-btn">skip_previous</button>
+<button class="flex items-center justify-center w-12 h-12 rounded-full bg-primary-fixed-dim text-on-primary shadow-[0_0_15px_rgba(0,240,255,0.6)] hover:scale-110 transition-all" id="play-pause-btn">
+<span class="material-symbols-outlined text-3xl" data-icon="play_arrow" id="play-icon">play_arrow</span>
+</button>
+<button class="material-symbols-outlined text-on-surface-variant hover:text-primary text-3xl transition-all" data-icon="skip_next" id="next-btn">skip_next</button>
+</div>
+</div> -->
+</div>
+</header>
+<!-- Mobile Menu Overlay -->
+<div class="fixed inset-0 z-[60] bg-surface-container-lowest/95 backdrop-blur-xl opacity-0 pointer-events-none transform -translate-y-4 transition-all duration-300 flex flex-col items-center justify-center" id="mobile-menu-overlay">
+<button class="absolute top-6 right-6 material-symbols-outlined text-primary-fixed-dim text-3xl" id="close-menu-btn">close</button>
+<div class="flex flex-col items-center gap-8">
+<a class="font-display-caps text-2xl text-on-surface-variant/50 hover:text-primary-fixed-dim transition-colors tracking-tighter" href="#" onclick="showComingSoon('cm-clothing')">CLOTHING</a>
+<a class="font-display-caps text-2xl text-on-surface-variant/50 hover:text-primary-fixed-dim transition-colors tracking-tighter" href="#" onclick="showComingSoon('cm-pressfolios')">PRESSFOLIOS</a>
+<a class="font-display-caps text-2xl text-on-surface-variant/50 hover:text-primary-fixed-dim transition-colors tracking-tighter" href="#" onclick="showComingSoon('cm-websites')">WEBSITES</a>
+<a class="font-display-caps text-2xl text-on-surface-variant/50 hover:text-primary-fixed-dim transition-colors tracking-tighter" href="#" onclick="showComingSoon('cm-music')">MUSIC</a>
+</div>
+<div class="absolute bottom-12 text-center">
+<span class="text-xs font-label-sm text-on-surface-variant/50 tracking-widest">CUE PORTALS v1.0</span>
+</div>
+</div>
+<!-- Coming Soon Modal -->
+<div class="fixed inset-0 z-[100] hidden items-center justify-center bg-black/80 backdrop-blur-sm p-4" id="coming-soon-modal">
+<div class="liquid-glass p-1 rounded-lg max-w-sm w-full relative">
+<button class="absolute -top-2 -right-2 bg-primary-fixed-dim text-on-primary rounded-full w-8 h-8 flex items-center justify-center shadow-lg z-10" onclick="hideComingSoon()">
+<span class="material-symbols-outlined text-xl">close</span>
+</button>
+<div class="bg-surface-container rounded-md overflow-hidden">
+<div class="px-4 py-2 bg-surface-container-high border-b border-outline-variant/30 flex justify-between items-center">
+<span class="font-label-sm text-[10px] text-primary">SYSTEM_ALERT.EXE</span>
+<div class="flex gap-1">
+<div class="w-2 h-2 rounded-full bg-error"></div>
+<div class="w-2 h-2 rounded-full bg-primary-fixed-dim"></div>
+</div>
+</div>
+<img id="cm-clothing" alt="Coming Soon" class="hidden w-full h-auto  hover:grayscale-0 transition-all duration-700 " src="./assets/404clothing.jpg"/>
+<img id="cm-pressfolios" alt="Coming Soon" class="hidden w-full h-auto  hover:grayscale-0 transition-all duration-700" src="./assets/press404.jpg"/>
+<img id="cm-websites" alt="Coming Soon" class="hidden w-full h-auto  hover:grayscale-0 transition-all duration-700" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAP40Kk9vpK9YPsUGphBugFWIg53GCkZLkTp-Qr6IbuCzUkjX0IFkCe1AGd-lEeqGAfIdB0b6oEPb3FRblLSWPOUHupc6arDTF0jh_SPt5Owm1vbfkbNRBRS6JUX-Ew-3k5rT3lPFgEnnO0Bjw0jMTPpGoiAxtaDbn3EkA1EfxzpRZNi5thVsA8krAhchIQy0UyG4eK_EKlJeFZwPaRfCBAl8goLn-JRA-ig5rn3hgnylVjlVIHNQh-_EnLaLCN04mjDCfqJn2oW7M"/>
+<img id="cm-music" alt="Coming Soon" class="hidden w-full h-auto  hover:grayscale-0 transition-all duration-700" src="./assets/404music.jpg"/>
+
+<div class="p-4 text-center">
+<h3 class="font-display-caps text-primary mb-2">ACCESS RESTRICTED</h3>
+<p class="text-sm text-on-surface-variant font-body-md">This sector is currently under construction. Please return after the next global synchronization.</p>
+</div>
+</div>
+</div>
+</div>
+<!-- Main Content Canvas -->
+<main class="relative z-10 flex-grow flex flex-col items-center justify-center pointer-events-none">
+<div class="max-w-4xl text-center px-gutter space-y-4 pointer-events-auto">
+</div>
+<!-- HUD Corner Brackets -->
+<div class="absolute top-1/4 left-margin-desktop w-12 h-12 border-t-2 border-l-2 border-primary-fixed-dim/30 pointer-events-none hidden md:block"></div>
+<div class="absolute top-1/4 right-margin-desktop w-12 h-12 border-t-2 border-r-2 border-primary-fixed-dim/30 pointer-events-none hidden md:block"></div>
+<div class="absolute bottom-1/4 left-margin-desktop w-12 h-12 border-b-2 border-l-2 border-primary-fixed-dim/30 pointer-events-none hidden md:block"></div>
+<div class="absolute bottom-1/4 right-margin-desktop w-12 h-12 border-b-2 border-r-2 border-primary-fixed-dim/30 pointer-events-none hidden md:block"></div>
+</main>
+<script>
+    // Hamburger Menu Logic
+    const hamburgerBtn = document.getElementById('hamburger-btn');
+    const closeMenuBtn = document.getElementById('close-menu-btn');
+    const menuOverlay = document.getElementById('mobile-menu-overlay');
+
+    hamburgerBtn.addEventListener('click', () => {
+        menuOverlay.classList.add('active');
+        document.body.style.overflow = 'hidden';
+    });
+
+    closeMenuBtn.addEventListener('click', () => {
+        menuOverlay.classList.remove('active');
+        document.body.style.overflow = '';
+    });
+
+    // Coming Soon Logic
+    function showComingSoon(imageId) {
+        const modal = document.getElementById('coming-soon-modal');
+        const image = document.getElementById(imageId);
+        modal.classList.remove('hidden');
+        modal.classList.add('flex');
+        image.classList.remove('hidden');
+
+        // If coming from mobile menu, close it
+        menuOverlay.classList.remove('active');
+    }
+
+    function hideComingSoon() {
+        const modal = document.getElementById('coming-soon-modal');
+        const image = document.getElementById('coming-soon-modal').querySelector('img:not(.hidden)');
+        modal.classList.add('hidden');
+        modal.classList.remove('flex');
+        image.classList.add('hidden');
+        document.body.style.overflow = '';
+    }
+
+// Video Player Logic Integration
+    const videoElement = document.getElementById('sonic-video-player');
+    const playPauseBtn = document.getElementById('play-pause-btn');
+    const playIcon = document.getElementById('play-icon');
+    const prevBtn = document.getElementById('prev-btn');
+    const nextBtn = document.getElementById('next-btn');
+
+    // Video Asset Array (Placeholders)
+    const playlist = [
+        'assets/music/song2.mp4', // USER_ACTION: Replace with actual video URL 1
+        'assets/music/song1.mp4', // USER_ACTION: Replace with actual video URL 2
+        'assets/music/song3.mp4'  // USER_ACTION: Replace with actual video URL 3
+    ];
+    let currentIndex = 0;
+    let isPlaying = true; // Initialized to true for autoplay
+
+    function updateVideoSource() {
+        console.log("Updating video source to: ", playlist[currentIndex]);
+        videoElement.src = playlist[currentIndex];
+        videoElement.load();
+        if (isPlaying) {
+            videoElement.play().catch(err => {
+                console.log("Autoplay blocked: ", err);
+                isPlaying = false;
+                playIcon.textContent = 'play_arrow';
+                playPauseBtn.classList.remove('active-pulse');
+            });
+        }
+    }
+
+    function togglePlay() {
+        if (videoElement.paused || videoElement.ended) {
+            if (!videoElement.src || videoElement.src.includes('undefined')) {
+                updateVideoSource();
+            }
+            videoElement.play()
+                .then(() => {
+                    isPlaying = true;
+                    playIcon.textContent = 'pause';
+                    playPauseBtn.classList.add('active-pulse');
+                })
+                .catch(err => console.log("Play failed: ", err));
+        } else {
+            videoElement.pause();
+            isPlaying = false;
+            playIcon.textContent = 'play_arrow';
+            playPauseBtn.classList.remove('active-pulse');
+        }
+    }
+
+    function nextTrack() {
+        currentIndex = (currentIndex + 1) % playlist.length;
+        updateVideoSource();
+    }
+
+    function prevTrack() {
+        currentIndex = (currentIndex - 1 + playlist.length) % playlist.length;
+        updateVideoSource();
+    }
+
+    playPauseBtn.addEventListener('click', togglePlay);
+    nextBtn.addEventListener('click', nextTrack);
+    prevBtn.addEventListener('click', prevTrack);
+
+    // Micro-interaction for Liquid-press effect
+    document.querySelectorAll('button, a').forEach(el => {
+        el.addEventListener('mousedown', () => {
+            el.classList.add('scale-95');
+        });
+        el.addEventListener('mouseup', () => {
+            el.classList.remove('scale-95');
+        });
+        el.addEventListener('mouseleave', () => {
+            el.classList.remove('scale-95');
+        });
+    });
+
+    // Simple animation trigger for hero
+    window.addEventListener('load', () => {
+        const h1 = document.querySelector('h1');
+        updateVideoSource();
+        const mainContent = document.querySelector('main div');
+        if(mainContent) {
+            mainContent.style.animation = 'fadeInUp 1s ease-out forwards';
+        }
+        if(h1) {
+            h1.classList.remove('translate-y-10', 'opacity-0');
+        }
+    });
+</script>
+</body></html>
